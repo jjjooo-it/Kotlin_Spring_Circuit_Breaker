@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: circuit-breaker
+
+server:
+  port: 8080
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      randomErrorCircuit:
+        failureRateThreshold: 15
+        slowCallRateThreshold: 50
+        slowCallDurationThreshold: 2000ms
+        permittedNumberOfCallsInHalfOpenState: 10
+        maxWaitDurationInHalfOpenState: 10s
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 100
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: 5s
